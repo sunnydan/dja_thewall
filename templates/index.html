@@ -1,0 +1,53 @@
+<h1>User Account Site</h1>
+{% if logged_in %}
+<p>Logged in as: {{ email }}</p>
+<a href="/logout">Logout</a>
+<a href="/userpage">User Page</a>
+{% else %}
+<a href="/login">Login to Account</a>
+<a href="/register">Register an Account</a>
+{% endif %}
+<hr>
+{% if logged_in %}
+{% for message in messages %}
+<div style="border: solid 1px black; padding: 5px; margin-top: 5px;">
+<p>{{ message['user'] }} - {{ message['timestamp'] }}</p>
+<p>{{ message['message'] }}</p>
+    {% if message['deleteable'] %}
+        <form action="/deletetext" method="POST">
+        <input type="hidden" name="type" value="message">
+        <input type="hidden" name="id" value="{{ message['id'] }}">
+        <input type="submit" value="Delete message">
+        </form>
+    {% endif %}
+    {% for comment in message['comments'] %}
+    <div style="border: solid 1px black; padding: 5px; margin-left: 10px; margin-top: 5px;">
+    <p>{{ comment['user'] }} - {{ comment['timestamp'] }}</p>
+    <p>{{ comment['comment'] }}</p>
+        {% if comment['deleteable'] %}
+            <form action="/deletetext" method="POST">
+            <input type="hidden" name="type" value="comment">
+            <input type="hidden" name="id" value="{{ comment['id'] }}">
+            <input type="submit" value="Delete comment">
+            </form>
+        {% endif %}
+    </div>
+    {% endfor %}
+    <p>Post a comment</p>
+    <form action="/processtext" method="POST">
+    <textarea name="text" id="messagearea" cols="50" rows="3"></textarea>
+    <input type="hidden" name="type" value="comment">
+    <input type="hidden" name="messageid" value="{{ message['id'] }}">
+    <br>
+    <input type="submit" name="submit" id="messagesubmit" value="Post a comment">
+    </form>
+</div>
+{% endfor %}
+<p>Post a message</p>
+<form action="/processtext" method="POST">
+<textarea name="text" id="messagearea" cols="50" rows="3"></textarea>
+<input type="hidden" name="type" value="message">
+<br>
+<input type="submit" name="submit" id="messagesubmit" value="Post a message">
+</form>
+{% endif %}
