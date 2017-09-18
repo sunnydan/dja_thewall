@@ -1,10 +1,14 @@
+<a href="/">Main Page</a>
+<a href="/users">User List</a>
 <h1>User Page</h1>
-<p>ID: {{ id }}</p>
-<p>Email: {{ email }}</p>
-<p>First Name: {{ first_name }}</p>
-<p>Last Name: {{ last_name }}</p>
-<form action="/delete">
-<input type="hidden" name="id" id="id" value="{{ id }}">
-<input type="submit" name="submit" id="submit" value="Delete User Account">
-</form>
+<p>ID: {{ user['id'] }}</p>
+<p>First Name: {{ user['first_name'] }}</p>
+<p>Last Name: {{ user['last_name'] }}</p>
+<p>Email: {{ user['email'] }}</p>
+<p>Created at: {{ user['created_at'] }}</p>
+<p>Last Updated at: {{ user['updated_at'] }}</p>
+{% if permission %}
+<a href="/deleteuser/{{ user['id'] }}">Delete User</a>
+<a href="/updateuser/{{ user['id'] }}">Edit User</a>
+{% endif %}
 <a href="/">Main Page</a>

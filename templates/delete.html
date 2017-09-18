@@ -7,7 +7,7 @@
 {% endwith %}
 <h1>Delete User Account?</h1>
 <p>If you are sure you want to delete your user account, enter your password below:</p>
-<form action="/deleteconfirm" method="POST">
+<form action="/deleteconfirm/{{ id }}" method="POST">
 <input type="password" name="password" id="password">
 <input type="submit" name="submit" id="submit">
 <input type="reset">

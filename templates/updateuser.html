@@ -1,0 +1,19 @@
+<a href="/userpage/{{ user['id'] }}">Cancel</a>
+<h1>Edit User</h1>
+{% with messages = get_flashed_messages() %} 
+{% if messages %} 
+    {% for message in messages %}
+        <p style="color: red;">{{message}}</p>
+    {% endfor %} 
+{% endif %} 
+{% endwith %}
+<form action="/processupdateuser/{{ user['id'] }}" method="POST">
+    <label for="email">Email: <input type="email" name="email" value="{{ user['email'] }}"></label><br>
+    <label for="first_name">First Name: <input type="text" name="first_name" id="first_name" value="{{ user['first_name'] }}"></label><br>
+    <label for="last_name">Last Name: <input type="text" name="last_name" id="last_name" value="{{ user['last_name'] }}"></label><br>
+    <label for="password">Current Password: <input type="password" name="password" id="password"></label><br>    
+    <label for="new_password">New Password: <input type="password" name="new_password" id="new_password"></label><br>
+    <label for="confirm_new_password">Confirm New Password: <input type="password" name="confirm_new_password" id="confirm_new_password"></label><br>
+    <input type="submit" value="Submit">
+    <input type="reset" value="Reset">
+</form>

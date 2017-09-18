@@ -2,11 +2,12 @@
 {% if logged_in %}
 <p>Logged in as: {{ email }}</p>
 <a href="/logout">Logout</a>
-<a href="/userpage">User Page</a>
+<a href="/userpage/{{ user['id'] }}">User Page</a>
 {% else %}
 <a href="/login">Login to Account</a>
 <a href="/register">Register an Account</a>
 {% endif %}
+<a href="/users">User List</a>
 <hr>
 {% if logged_in %}
 {% for message in messages %}

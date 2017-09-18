@@ -1,0 +1,15 @@
+<a href="/">Return to Main Page</a>
+{% if users %}
+{% for user in users %}
+<hr>
+<a href="/userpage/{{ user['id'] }}" style="text-decoration: none; color: black;">
+<h3>User {{ user['id'] }}</h3>
+<p>Full Name: {{ user['first_name']}} {{ user['last_name']}}</p>
+<p>Email: {{ user['email']}}</p>
+<p>Created at: {{ user['created_at']}}</p>
+<p>Last Updated at: {{ user['updated_at']}}</p>
+</a>
+{% endfor  %}
+{% else %}
+<h1>No Users In Database</h1>
+{% endif %}
